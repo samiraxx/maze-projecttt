@@ -187,3 +187,23 @@ def main():
 
 if name == "__main__":
     main()
+    def find_path(maze, start, end, path=[]):
+    x, y = start
+    if start == end:  
+        return path + [start]
+    
+    
+    if not (0 <= x < len(maze) and 0 <= y < len(maze[0])) or maze[x][y] == 1:
+        return None
+
+  
+
+   
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  
+    for dx, dy in directions:
+        new_x, new_y = x + dx, y + dy
+        new_path = find_path(maze, (new_x, new_y), end, path + [(x, y)])
+        if new_path:
+            return new_path
+
+    return None 
