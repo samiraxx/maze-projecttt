@@ -1,7 +1,7 @@
 import random
 
-ROWS = 10
-COLS = 10
+ROWS = 21
+COLS = 21
 WALL = '#'
 PATH = ' '
 VISITED = '.'
@@ -13,7 +13,6 @@ directions = [(-2, 0), (2, 0), (0, -2), (0, 2)]
 def is_valid(r, c):
     return 0 <= r < ROWS and 0 <= c < COLS
 
-
 def generate_maze(r, c):
     maze[r][c] = PATH
     random.shuffle(directions)
@@ -23,11 +22,10 @@ def generate_maze(r, c):
             maze[r + dr // 2][c + dc // 2] = PATH
             generate_maze(nr, nc)
 
-
 def find_path(r, c):
     if not is_valid(r, c) or maze[r][c] != PATH:
         return False
-    if (r, c) == (ROWS - 1, COLS - 1):
+    if (r, c) == (ROWS - 2, COLS - 2):
         maze[r][c] = VISITED
         return True
     maze[r][c] = VISITED
@@ -37,13 +35,12 @@ def find_path(r, c):
     maze[r][c] = PATH
     return False
 
-
 def print_maze():
     for row in maze:
         print(''.join(row))
 
-generate_maze(0, 0)
-maze[0][0] = PATH
-maze[ROWS - 1][COLS - 1] = PATH
-find_path(0, 0)
+generate_maze(1,1)
+maze[1][1] = PATH
+maze[ROWS - 2][COLS - 2] = PATH
+find_path(1, 1)
 print_maze()
